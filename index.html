@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" type="image/png" href="https://scontent-mia3-3.xx.fbcdn.net/v/t39.30808-6/481273802_1699277814337108_8436387946405156817_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=CidhA4h9LbYQ7kNvwH1ee0o&_nc_oc=AdnupXubkXPUVLnSkp0elNlOAtoEZGhnB_PL0yY12DE9noMOAdn_0xgEu7HRtX9vpVs&_nc_zt=23&_nc_ht=scontent-mia3-3.xx&_nc_gid=Jh3_1fb63H880Z0c6L7D_g&oh=00_AfhH7kM3c-dtsFAF9R6yEbPXWaKiA_flfQiWIM1iYrRgrQ&oe=691D2D86">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Create card</title>
+</head>
+<body>
+    <div class="wrap">
+        <div class="panel controls">
+            <div class="panel-header">
+                <div class="logo">
+                    <img src="https://scontent-mia3-3.xx.fbcdn.net/v/t39.30808-6/481273802_1699277814337108_8436387946405156817_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=CidhA4h9LbYQ7kNvwH1ee0o&_nc_oc=AdnupXubkXPUVLnSkp0elNlOAtoEZGhnB_PL0yY12DE9noMOAdn_0xgEu7HRtX9vpVs&_nc_zt=23&_nc_ht=scontent-mia3-3.xx&_nc_gid=Jh3_1fb63H880Z0c6L7D_g&oh=00_AfhH7kM3c-dtsFAF9R6yEbPXWaKiA_flfQiWIM1iYrRgrQ&oe=691D2D86" alt="Logo" id="site-logo">
+                </div>
+                <div style="position:relative">
+                    <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="hamburger-menu" id="hamburgerMenu">
+                        <a href="#" id="menu-new">Nuevo</a>
+                        <a href="#" id="menu-save">Guardar</a>
+                        <a href="#" id="menu-load">Cargar</a>
+                        <a href="#" id="menu-about">Acerca</a>
+                    </div>
+                </div>
+            </div>
+            <div class="controls-scroll">
+                <label for="card-name">Nombre de Carta</label>
+                <input id="card-name" type="text" value="Luz de Guardián">
+
+                <div class="row">
+                    <div>
+                        <label for="card-class">Clase / Tipo</label>
+                        <select id="card-class">
+                            <option>Guerrero Arcano</option>
+                            <option>Mago Errante</option>
+                            <option>Bestia Celeste</option>
+                            <option>Artefacto</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="card-rarity">Rareza</label>
+                        <select id="card-rarity">
+                            <option>Común</option>
+                            <option>Rara</option>
+                            <option>Épica</option>
+                            <option>Legendaria</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <label for="card-level">Nivel</label>
+                        <input id="card-level" type="number" value="4" min="1" max="12">
+                    </div>
+                    <div>
+                        <label for="card-power">Poder</label>
+                        <input id="card-power" type="number" value="1600" min="0">
+                    </div>
+                    <div>
+                        <label for="card-def">Defensa</label>
+                        <input id="card-def" type="number" value="0" min="0" placeholder="--">
+                    </div>
+                </div>
+
+                <label for="card-desc">Descripción / Efecto</label>
+                <textarea id="card-desc" rows="5">Cuando invocado, otorga +300 de ataque a los aliados cercanos durante 1 turno.</textarea>
+
+                <label>Imagen de Arte</label>
+                <div class="upload">
+                    <input id="imgfile" type="file" accept="image/*">
+                    <button id="clear-img" class="ghost">Limpiar</button>
+                </div>
+
+                <label for="palette">Paleta / Estilo</label>
+                <select id="palette">
+                    <option value="violet">Violeta Místico</option>
+                    <option value="amber">Ambar Antiguo</option>
+                    <option value="teal">Teal Marino</option>
+                    <option value="mono">Monocromo</option>
+                </select>
+
+                <div style="margin-top:8px; display:flex; gap:8px;">
+                    <button id="download">Descargar PNG</button>
+                    <button id="exportJson" class="ghost">Exportar JSON</button>
+                </div>
+
+                <hr style="margin:12px 0; border:none; height:1px; background:linear-gradient(90deg,transparent,#ffffff0d,transparent)">
+
+                <label for="card-width">Tamaño de salida (px)</label>
+                <div class="row">
+                    <input id="card-width" type="number" value="840" min="420">
+                    <input id="card-height" type="number" value="1200" min="600">
+                </div>
+            </div>
+        </div>
+
+        <div class="panel preview-wrap">
+            <div class="card-frame" id="preview-frame">
+                <div class="card-inner" id="card-preview">
+                    <div class="card-header">
+                        <div>
+                            <div class="title" id="preview-title">Luz de Guardián</div>
+                            <div style="font-size:12px;color:var(--muted);" id="preview-class">Guerrero Arcano • Nivel 4</div>
+                        </div>
+                        <div style="text-align:right;color:var(--muted);font-size:13px" id="preview-rarity">Épica</div>
+                    </div>
+
+                    <div class="art" id="preview-art">
+                        <img id="preview-img" src="" alt="" style="display:none;">
+                        <div id="art-placeholder" style="color:var(--muted);font-size:13px">Sin imagen</div>
+                    </div>
+
+                    <div class="stats">
+                        <div class="stat">
+                            <small>PODER</small>
+                            <strong id="preview-power">1600</strong>
+                        </div>
+                        <div class="stat">
+                            <small>DEF</small>
+                            <strong id="preview-def">--</strong>
+                        </div>
+                        <div class="stat">
+                            <small>NIVEL</small>
+                            <strong id="preview-level">4</strong>
+                        </div>
+                    </div>
+
+                    <div class="desc" id="preview-desc">
+                        Cuando invocado, otorga +300 de ataque a los aliados cercanos durante 1 turno.
+                    </div>
+
+                    <div class="actions">
+                        <div style="font-size:12px;color:var(--muted)">Preview • Estilo Master</div>
+                        <div style="display:flex;gap:8px;">
+                            <button id="btn-random" class="ghost">Aleatorio</button>
+                            <button id="btn-copy" class="ghost">Copiar JSON</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <canvas id="card-canvas" style="display:none;"></canvas>
+        </div>
+    </div>
+
+    <footer>
+        CreateCard - &copy; 2025 .
+    </footer>
+
+    <script>
+        // JavaScript funcional; si deseas TypeScript, ver el bloque al final con la versión .ts
+        (function(){
+            const nameInp = document.getElementById('card-name');
+            const clsInp = document.getElementById('card-class');
+            const rarityInp = document.getElementById('card-rarity');
+            const levelInp = document.getElementById('card-level');
+            const powerInp = document.getElementById('card-power');
+            const defInp = document.getElementById('card-def');
+            const descInp = document.getElementById('card-desc');
+            const imgFile = document.getElementById('imgfile');
+            const clearImg = document.getElementById('clear-img');
+            const palette = document.getElementById('palette');
+            const widthInp = document.getElementById('card-width');
+            const heightInp = document.getElementById('card-height');
+
+            const previewTitle = document.getElementById('preview-title');
+            const previewClass = document.getElementById('preview-class');
+            const previewRarity = document.getElementById('preview-rarity');
+            const previewPower = document.getElementById('preview-power');
+            const previewLevel = document.getElementById('preview-level');
+            const previewDef = document.getElementById('preview-def');
+            const previewDesc = document.getElementById('preview-desc');
+            const previewImg = document.getElementById('preview-img');
+            const artPlaceholder = document.getElementById('art-placeholder');
+            const previewArt = document.getElementById('preview-art');
+
+            const btnRandom = document.getElementById('btn-random');
+            const btnDownload = document.getElementById('download');
+            const btnExport = document.getElementById('exportJson');
+            const btnCopy = document.getElementById('btn-copy');
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const hamburgerMenu = document.getElementById('hamburgerMenu');
+            const siteLogo = document.getElementById('site-logo');
+
+            // Listen inputs to update preview
+            function updatePreview(){
+                previewTitle.textContent = nameInp.value || 'Carta sin nombre';
+                previewClass.textContent = (clsInp.value || '') + ' • Nivel ' + (levelInp.value || '1');
+                previewRarity.textContent = rarityInp.value || '';
+                previewPower.textContent = powerInp.value || '--';
+                previewLevel.textContent = levelInp.value || '--';
+                previewDef.textContent = (defInp && defInp.value) ? defInp.value : '--';
+                previewDesc.textContent = descInp.value || '';
+                applyPalette(palette.value);
+            }
+
+            function applyPalette(p){
+                const root = document.documentElement;
+                if(p === 'violet'){
+                    root.style.setProperty('--accent','#9b7cff');
+                } else if(p==='amber'){
+                    root.style.setProperty('--accent','#ffb86b');
+                } else if(p==='teal'){
+                    root.style.setProperty('--accent','#2dd4bf');
+                } else {
+                    root.style.setProperty('--accent','#9aa0a6');
+                }
+                // subtle border color change for rarity
+                const rareColor = rarityInp.value==='Legendaria' ? '#ffd166' : rarityInp.value==='Épica' ? '#b884ff' : rarityInp.value==='Rara' ? '#7dd3fc' : '#a1a1aa';
+                previewRarity.style.color = rareColor;
+                // also apply to the rarity select so it's not white in the control box
+                try{ rarityInp.style.color = rareColor; }catch(e){}
+            }
+
+            function getRarityColor(){
+                return rarityInp.value==='Legendaria' ? '#ffd166' : rarityInp.value==='Épica' ? '#b884ff' : rarityInp.value==='Rara' ? '#7dd3fc' : '#a1a1aa';
+            }
+
+            // Image upload handling
+            let currentImage = null;
+            imgFile.addEventListener('change', (e)=>{
+                const f = e.target.files[0];
+                if(!f) return;
+                const url = URL.createObjectURL(f);
+                previewImg.src = url;
+                previewImg.style.display = 'block';
+                artPlaceholder.style.display = 'none';
+                currentImage = new Image();
+                currentImage.onload = () => { URL.revokeObjectURL(url); };
+                currentImage.src = url;
+            });
+
+            clearImg.addEventListener('click', ()=>{
+                previewImg.src = '';
+                previewImg.style.display = 'none';
+                artPlaceholder.style.display = 'block';
+                imgFile.value = '';
+                currentImage = null;
+            });
+
+            // Random quick generator
+            btnRandom.addEventListener('click', ()=>{
+                const names = ['Centinela Solar','Ecosombrío','Forjador de Runas','Vástago del Abismo','Cazador del Alba'];
+                const classes = ['Guerrero Arcano','Mago Errante','Bestia Celeste','Artefacto'];
+                const rarities = ['Común','Rara','Épica','Legendaria'];
+                nameInp.value = names[Math.floor(Math.random()*names.length)];
+                clsInp.value = classes[Math.floor(Math.random()*classes.length)];
+                rarityInp.value = rarities[Math.floor(Math.random()*rarities.length)];
+                levelInp.value = Math.floor(Math.random()*8)+1;
+                powerInp.value = Math.floor(Math.random()*3000);
+                descInp.value = 'Efecto único: altera el campo aliado por 1 turno cuando se invoca.';
+                applyPalette(['violet','amber','teal','mono'][Math.floor(Math.random()*4)]);
+                updatePreview();
+            });
+
+            // Export JSON
+            function gatherData(){
+                return {
+                    name: nameInp.value,
+                    class: clsInp.value,
+                    rarity: rarityInp.value,
+                    level: Number(levelInp.value)||1,
+                    power: Number(powerInp.value)||0,
+                    defense: Number(defInp.value) || 0,
+                    description: descInp.value,
+                    palette: palette.value,
+                    image: null // not inlined by default
+                };
+            }
+
+            btnExport.addEventListener('click', ()=>{
+                const data = gatherData();
+                const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a'); a.href = url; a.download = (data.name || 'card') + '.json';
+                document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+            });
+
+            btnCopy.addEventListener('click', async ()=>{
+                const data = gatherData();
+                try{
+                    await navigator.clipboard.writeText(JSON.stringify(data, null, 2));
+                    btnCopy.textContent = 'Copiado ✓';
+                    setTimeout(()=>btnCopy.textContent='Copiar JSON',1200);
+                }catch(e){
+                    btnCopy.textContent = 'Error';
+                    setTimeout(()=>btnCopy.textContent='Copiar JSON',1200);
+                }
+            });
+
+            // Header menu behavior
+            hamburgerBtn.addEventListener('click', (e)=>{
+                e.stopPropagation();
+                hamburgerMenu.classList.toggle('open');
+            });
+
+            // Close menu on outside click
+            document.addEventListener('click', (e)=>{
+                if(!hamburgerMenu.contains(e.target) && !hamburgerBtn.contains(e.target)){
+                    hamburgerMenu.classList.remove('open');
+                }
+            });
+
+            // Menu actions (basic)
+            document.getElementById('menu-new').addEventListener('click', (e)=>{
+                e.preventDefault();
+                if(confirm('Crear nueva carta? Perderás cambios no guardados.')){
+                    nameInp.value='Carta sin nombre'; clsInp.selectedIndex=0; rarityInp.selectedIndex=0; levelInp.value=1; powerInp.value=0; defInp.value=''; descInp.value=''; clearImg.click(); updatePreview();
+                }
+                hamburgerMenu.classList.remove('open');
+            });
+            document.getElementById('menu-save').addEventListener('click', (e)=>{
+                e.preventDefault();
+                // trigger export JSON
+                btnExport.click();
+                hamburgerMenu.classList.remove('open');
+            });
+            document.getElementById('menu-load').addEventListener('click', (e)=>{
+                e.preventDefault();
+                alert('Funcionalidad de carga no implementada todavía.');
+                hamburgerMenu.classList.remove('open');
+            });
+            document.getElementById('menu-about').addEventListener('click', (e)=>{
+                e.preventDefault();
+                alert('CreateCard — Editor de cartas.');
+                hamburgerMenu.classList.remove('open');
+            });
+
+            // Canvas export / drawing
+            function drawCardToCanvas(w, h){
+                const canvas = document.getElementById('card-canvas');
+                canvas.width = w; canvas.height = h;
+                const ctx = canvas.getContext('2d');
+                // Background
+                ctx.fillStyle='#07111e'; ctx.fillRect(0,0,w,h);
+                // Outer border with gradient
+                const g = ctx.createLinearGradient(0,0,w,0);
+                g.addColorStop(0,'rgba(255,255,255,0.02)');
+                g.addColorStop(1,'rgba(0,0,0,0)');
+                ctx.fillStyle = g; ctx.fillRect(10,10,w-20,h-20);
+
+                // Title band
+                ctx.fillStyle = hexShift(getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(), -18);
+                ctx.fillRect(36,36,w-72,78);
+
+                // Title text
+                ctx.font = `${Math.floor(w/24)}px Inter, sans-serif`;
+                ctx.fillStyle = '#fff';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(nameInp.value || 'Carta sin nombre', 56, 36 + 39);
+
+                // Art box
+                const artX = 36, artY = 36+78+16;
+                const artW = w - 72, artH = Math.floor(h*0.42);
+                // art background
+                ctx.fillStyle = '#0d1a26'; ctx.fillRect(artX, artY, artW, artH);
+                // draw image if exists
+                if(currentImage){
+                    // fit and center-crop
+                    const ratio = Math.max(artW/currentImage.width, artH/currentImage.height);
+                    const iw = currentImage.width * ratio;
+                    const ih = currentImage.height * ratio;
+                    const ix = artX + (artW - iw)/2;
+                    const iy = artY + (artH - ih)/2;
+                    try{
+                        ctx.drawImage(currentImage, ix, iy, iw, ih);
+                    }catch(e){
+                        // cross-origin images might error; fallback to filled rect
+                        ctx.fillStyle = '#314455'; ctx.fillRect(artX, artY, artW, artH);
+                    }
+                }else{
+                    // placeholder pattern
+                    ctx.fillStyle = '#122033'; ctx.fillRect(artX, artY, artW, artH);
+                    ctx.fillStyle = '#8ea2b8';
+                    ctx.font = `${Math.floor(w/30)}px Inter, sans-serif`;
+                    ctx.fillText('Sin imagen', artX + 20, artY + artH/2);
+                }
+
+                // Stats area
+                const statsY = artY + artH + 14;
+                ctx.fillStyle = '#07111e';
+                ctx.fillRect(36, statsY, w-72, 68);
+                // texts
+                ctx.fillStyle = '#b8c3d6'; ctx.font = `${Math.floor(w/36)}px Inter, sans-serif`;
+                const powerText = 'PODER: ' + (powerInp.value||'--');
+                const defText = 'DEF: ' + (defInp && defInp.value ? defInp.value : '--');
+                const levelText = 'NIVEL: ' + (levelInp.value||'--');
+                // left
+                const leftX = 56;
+                ctx.fillText(powerText, leftX, statsY + 28);
+                // center
+                const defWidth = ctx.measureText(defText).width;
+                const centerX = Math.round(w/2 - defWidth/2);
+                ctx.fillText(defText, centerX, statsY + 28);
+                // right
+                const levelWidth = ctx.measureText(levelText).width;
+                const rightX = Math.round(w - 56 - levelWidth);
+                ctx.fillText(levelText, rightX, statsY + 28);
+                // rarity label below
+                const rareColor = getRarityColor();
+                ctx.fillStyle = rareColor;
+                ctx.font = `${Math.floor(w/44)}px Inter, sans-serif`;
+                ctx.fillText('RAREZA: ' + (rarityInp.value||''), 56, statsY + 52);
+                // restore desc text color
+                ctx.fillStyle = '#cbd6e4'; ctx.font = `${Math.floor(w/44)}px Inter, sans-serif`;
+
+                // Desc box
+                const descY = statsY + 80;
+                const descH = h - descY - 56;
+                ctx.fillStyle = '#08131a';
+                ctx.fillRect(36, descY, w-72, descH);
+                ctx.fillStyle = '#cbd6e4';
+                wrapText(ctx, descInp.value || '', 56, descY + 28, w-72-40, Math.floor(w/44));
+
+                // subtitle with class
+                ctx.fillStyle = '#93a6bd'; ctx.font = `${Math.floor(w/50)}px Inter, sans-serif`;
+                ctx.fillText(clsInp.value || '', w-56 - ctx.measureText(clsInp.value||'').width, 36 + 39);
+
+                return canvas;
+            }
+
+            function wrapText(ctx, text, x, y, maxWidth, lineHeight){
+                const words = text.split(' ');
+                let line = '';
+                for(let n = 0; n < words.length; n++) {
+                    const testLine = line + words[n] + ' ';
+                    const metrics = ctx.measureText(testLine);
+                    const testWidth = metrics.width;
+                    if (testWidth > maxWidth && n > 0) {
+                        ctx.fillText(line, x, y);
+                        line = words[n] + ' ';
+                        y += lineHeight;
+                    }
+                    else {
+                        line = testLine;
+                    }
+                }
+                ctx.fillText(line, x, y);
+            }
+
+            // Slightly darken/lighten a hex color
+            function hexShift(hex, amount){
+                try{
+                    hex = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+                    // css var might be rgb or hex; handle common case hex or rgb
+                    if(hex.startsWith('rgb')){
+                        // parse rgb
+                        const nums = hex.match(/\d+/g).map(Number);
+                        const r = Math.min(255, Math.max(0, nums[0] + amount));
+                        const g = Math.min(255, Math.max(0, nums[1] + amount));
+                        const b = Math.min(255, Math.max(0, nums[2] + amount));
+                        return `rgb(${r},${g},${b})`;
+                    }
+                    // assume hex like #rrggbb
+                    hex = hex.replace('#','');
+                    const num = parseInt(hex,16);
+                    let r = (num >> 16) + Math.floor(amount);
+                    let g = ((num >> 8) & 0x00FF) + Math.floor(amount);
+                    let b = (num & 0x0000FF) + Math.floor(amount);
+                    r = Math.max(0, Math.min(255,r));
+                    g = Math.max(0, Math.min(255,g));
+                    b = Math.max(0, Math.min(255,b));
+                    const rr = r.toString(16).padStart(2,'0');
+                    const gg = g.toString(16).padStart(2,'0');
+                    const bb = b.toString(16).padStart(2,'0');
+                    return `#${rr}${gg}${bb}`;
+                }catch(e){
+                    return '#222';
+                }
+            }
+
+            // Download PNG
+            btnDownload.addEventListener('click', ()=>{
+                const w = Number(widthInp.value)||840;
+                const h = Number(heightInp.value)||1200;
+                const canvas = drawCardToCanvas(w, h);
+                canvas.toBlob((blob)=>{
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a'); a.href = url; a.download = (nameInp.value || 'card') + '.png';
+                    document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+                });
+            });
+
+            // Wire inputs (include defense)
+            [nameInp, clsInp, rarityInp, levelInp, powerInp, defInp, descInp, palette].forEach(el=>{
+                el.addEventListener('input', updatePreview);
+            });
+
+            // init
+            applyPalette(palette.value);
+            updatePreview();
+        })();
+    </script>
+</body>
+</html>
