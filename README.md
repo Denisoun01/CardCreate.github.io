@@ -1,1 +1,1 @@
-<a href="https://github.com/Denisoun01/CardCreate.github.io/">option</a>
+<a href="https://denisoun01.github.io/CardCreate.github.io/">Create card</a>
